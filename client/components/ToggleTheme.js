@@ -4,11 +4,12 @@ import { ThemeContext } from "../context/theme/theme";
 
 const ToggleTheme = () => {
     const [theme, setTheme] = useContext(ThemeContext);
-    <Head>
-        <link rel="stylesheet" href={`css/${theme}.css`} />
-    </Head>
+
     return (
         <>
+            <Head>
+                <link rel="stylesheet" href={`css/${theme}.css`} />
+            </Head>
             {theme === "light" ? (
                 <span
                     onClick={() => {
