@@ -1,8 +1,13 @@
-import React from 'react'
+import { Layout } from "antd"
+import AdminLayout from './../../components/layouts/AdminLayout';
+
+const { Content, Sider } = Layout
 
 function Admin() {
     return (
-        <div>Admin</div>
+        <AdminLayout>
+            <h1>Page props...</h1>
+        </AdminLayout>
     )
 }
 
