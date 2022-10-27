@@ -1,13 +1,15 @@
-import { Menu, Button } from "antd";
+import { Menu, Button, Layout } from "antd";
 import {
-    MenuFoldOutlined,
-    MenuUnfoldOutlined,
-    ContainerOutlined,
-    MailOutlined,
-    AppstoreOutlined,
+    PushpinOutlined,
+    CameraOutlined,
+    UserSwitchOutlined,
+    SettingOutlined,
+    BgColorsOutlined,
+    UserOutlined,
+    CommentOutlined
 } from "@ant-design/icons";
-import { Layout } from "antd";
 import React, { useState } from 'react';
+import Link from 'next/link';
 
 const { Sider } = Layout
 
@@ -18,51 +20,88 @@ const AdminNav = () => {
     const [current, setCurrent] = useState("");
 
     return (
-        <div style={{ width: 256 }}>
-            <Button
-                type="primary"
-                onClick={() => setCollapsed(!collapsed)}
-                style={{ marginBottom: 16 }}
-            >
-                {React.createElement(
-                    collapsed ? MenuUnfoldOutlined : MenuFoldOutlined
+        <Sider collapsible>
 
-                )}
-            </Button>
             <Menu
                 defaultSelectedKeys={["1"]}
-                defaultOpenKeys={["sub1"]}
+                defaultOpenKeys={["2", "6", "10"]}
                 mode="inline"
-                theme="dark"
                 inlineCollapsed={collapsed}
             >
-                <Menu.Item key="1" icon={<ContainerOutlined />}>
-                    Option 1
+                <Menu.Item key="1" icon={<SettingOutlined />}>
+                    <Link href="/admin">
+                        <a>Dashboard</a>
+                    </Link>
                 </Menu.Item>
-                <Menu.Item key="2" icon={<ContainerOutlined />}>
-                    Option 2
-                </Menu.Item>
-                <Menu.Item key="3" icon={<ContainerOutlined />}>
-                    Option 3
-                </Menu.Item>
-                <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-                    <Menu.Item key={"5"}>Option 5</Menu.Item>
-                    <Menu.Item key={"6"}>Option 6</Menu.Item>
-                    <Menu.Item key={"7"}>Option 7</Menu.Item>
-                    <Menu.Item key={"8"}>Option 8</Menu.Item>
-
+                {/* Posts */}
+                <SubMenu key="2" icon={<PushpinOutlined />} title="Posts">
+                    <Menu.Item key="3">
+                        <Link href="/admin/posts">
+                            <a>All Posts</a>
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="4">
+                        <Link href="/admin/posts/new">
+                            <a>Add Posts</a>
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="5">
+                        <Link href="/admin/categories">
+                            <a>Categories</a>
+                        </Link>
+                    </Menu.Item>
                 </SubMenu>
-                <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
-                    <Menu.Item key={"9"}>Option 9</Menu.Item>
-                    <Menu.Item key={"10"}>Option 6</Menu.Item>
-                    <Menu.Item key={"11"}>Option 7</Menu.Item>
-                    <Menu.Item key={"12"}>Option 8</Menu.Item>
 
+                {/* Media */}
+                <SubMenu key="6" icon={<CameraOutlined />} title="Media">
+                    <Menu.Item key="7">
+                        <Link href="/admin/media/library">
+                            <a>Library</a>
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="8">
+                        <Link href="/admin/media/new">
+                            <a>Add New</a>
+                        </Link>
+                    </Menu.Item>
                 </SubMenu>
-                <Menu.Item></Menu.Item>
 
+                {/* Comments */}
+                <Menu.Item key="9" icon={<CommentOutlined />}>
+                    <Link href="/admin/comments">
+                        <a>Comments</a>
+                    </Link>
+                </Menu.Item>
+
+                {/* Users */}
+                <SubMenu key="10" icon={<UserSwitchOutlined />} title="Users">
+                    <Menu.Item key="11">
+                        <Link href="/admin/users">
+                            <a>All Users</a>
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="12">
+                        <Link href="/admin/users/new">
+                            <a>Add New</a>
+                        </Link>
+                    </Menu.Item>
+                </SubMenu>
+
+                {/* Profile */}
+                <Menu.Item key={"5"} icon={<UserOutlined />}>
+                    <Link href="/admin/userid">
+                        <a>Profile</a>
+                    </Link>
+                </Menu.Item>
+
+                {/* Customize */}
+                <Menu.Item key={"5"} icon={<BgColorsOutlined />}>
+                    <Link href="/admin/customize">
+                        <a>Customize</a>
+                    </Link>
+                </Menu.Item>
             </Menu>
-        </div>
+        </Sider>
     )
 }
 
