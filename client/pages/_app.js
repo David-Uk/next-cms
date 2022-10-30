@@ -1,6 +1,5 @@
 import { ThemeProvider } from "../context/theme/theme"
-// import 'antd/dist/antd.css';
-// import 'antd/dist/antd.dark.css';
+import '/public/css/styles.css'
 import TopNav from './../components/TopNav/TopNav';
 
 function MyApp({ Component, pageProps }) {
