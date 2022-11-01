@@ -10,6 +10,7 @@ import {
 } from "@ant-design/icons";
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useWindowWidth } from "@react-hook/window-size";
 
 const { Sider } = Layout
 
@@ -18,19 +19,24 @@ const { SubMenu } = Menu;
 const AdminNav = () => {
     const [collapsed, setCollapsed] = useState(false);
     const [current, setCurrent] = useState("");
-    // useEffect(() => {
-    //     typeof window && setCurrent(window.location.pathname);
-    // }, [typeof window && setCurrent(window.location.pathname)])
+    const onlyWidth = useWindowWidth();
 
     useEffect(() => {
         process.browser && setCurrent(window.location.pathname);
     }, [process.browser && window.location.pathname]);
 
+    useEffect(() => {
+        if (onlyWidth < 800) setCollapsed(true)
+        else setCollapsed(false);
+    }, [onlyWidth < 800])
+
     const activeName = (name) => `${current === name && "active"}`;
 
     return (
-        <Sider collapsible>
-
+        <Sider
+            collapsible
+            collapsed={collapsed}
+            onCollapse={() => setCollapsed(!collpased)}>
             <Menu
                 // defaultSelectedKeys={["1"]}
                 defaultOpenKeys={["2", "6", "10"]}
