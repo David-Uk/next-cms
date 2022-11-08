@@ -1,4 +1,4 @@
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import { UserAddOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import ToggleTheme from './../ToggleTheme';
 import { useState } from 'react';
@@ -21,12 +21,12 @@ const TopNav = () => {
                     <a>CMS</a>
                 </Link>
             </Menu.Item>
-            <Menu.Item key="signup" icon={<AppstoreOutlined />}>
+            <Menu.Item key="signup" icon={<UserAddOutlined />}>
                 <Link href="/signup">
                     <a>Signup</a>
                 </Link>
             </Menu.Item>
-            <Menu.Item key="signin" icon={<AppstoreOutlined />}>
+            <Menu.Item key="signin" icon={<UserAddOutlined />}>
                 <Link href="/signin">
                     <a>Signin</a>
                 </Link>
