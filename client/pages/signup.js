@@ -10,7 +10,7 @@ function Signup() {
     return (
         <Row>
             <Col span={8} offset={8}>
-                <h1 style={{ padding: "100px" }}>Signup</h1>
+                <h1 style={{ paddingTop: "100px" }}>Signup</h1>
 
                 {/* Name */}
                 <Form
