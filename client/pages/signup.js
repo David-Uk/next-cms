@@ -1,10 +1,19 @@
 import { UserOutlined, MailOutlined, LockOutlined } from '@ant-design/icons';
 import { Form, Row, Col, Input, Checkbox, Button } from 'antd';
 import Link from 'next/link';
+import axios from 'axios'
+import toast, { Toaster } from 'react-hot-toast';
+
 
 function Signup() {
-    const onFinish = values => {
+    const onFinish = async (values) => {
+        try {
+            const res = await axios.post('http://localhost:8000/api/signup', values);
+            console.log(res)
+        } catch (error) {
+            toast.error('Sign up failed')
 
+        }
     }
 
     return (
@@ -17,7 +26,7 @@ function Signup() {
                     name="normal_login"
                     className="login-form"
                     initialValues={{ remember: true }}
-                // onFinish={onFinish}
+                    onFinish={onFinish}
                 >
                     <Form.Item
                         name="name"
