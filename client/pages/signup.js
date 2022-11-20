@@ -3,14 +3,20 @@ import { Form, Row, Col, Input, Checkbox, Button } from 'antd';
 import Link from 'next/link';
 import axios from 'axios'
 import toast from 'react-hot-toast';
+import { useState } from 'react';
 
-
+useState
 function Signup() {
+    const [loading, setLoading] = useState(false);
     const onFinish = async (values) => {
+        setLoading(true)
         try {
             const { data } = await axios.post('http://localhost:8000/api/signup', values);
             // console.log(res)
-            if (data?.error) toast.error(data.error)
+            if (data?.error) {
+                toast.error(data.error);
+                setLoading(false);
+            }
             else {
                 toast.success(`Successfully signed up`)
 
@@ -75,7 +81,8 @@ function Signup() {
                         <Button
                             type="primary"
                             htmlType="submit"
-                            className="login-form-button">
+                            className="login-form-button"
+                            loading={loading}>
                             Sign up
                         </Button>
                         <br />
