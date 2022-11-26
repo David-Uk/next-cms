@@ -17,7 +17,7 @@ function Signup() {
     const onFinish = async (values) => {
         setLoading(true)
         try {
-            const { data } = await axios.post('http://localhost:8000/api/signup', values);
+            const { data } = await axios.post(`/signup`, values);
             // console.log(res)
             if (data?.error) {
                 toast.error(data.error);

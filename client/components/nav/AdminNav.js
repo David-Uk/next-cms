@@ -36,7 +36,7 @@ const AdminNav = () => {
         <Sider
             collapsible
             collapsed={collapsed}
-            onCollapse={() => setCollapsed(!collpased)}>
+            onCollapse={() => setCollapsed(!collapsed)}>
             <Menu
                 // defaultSelectedKeys={["1"]}
                 defaultOpenKeys={["2", "6", "10"]}
