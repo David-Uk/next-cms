@@ -3,11 +3,17 @@ import { Form, Row, Col, Input, Checkbox, Button } from 'antd';
 import Link from 'next/link';
 import axios from 'axios'
 import toast from 'react-hot-toast';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { AuthContext } from '../context/auth/auth';
+import { useRouter } from 'next/router';
 
-useState
+
 function Signup() {
+    const [auth, setAuth] = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
+
+    const router = useRouter();
+
     const onFinish = async (values) => {
         setLoading(true)
         try {
@@ -18,7 +24,12 @@ function Signup() {
                 setLoading(false);
             }
             else {
-                toast.success(`Successfully signed up`)
+                setAuth(data);
+                localStorage.setItem("auth", JSON.stringify(data));
+                toast.success(`Successfully signed up`);
+                setLoading(false);
+
+                router.push('/admin')
 
             }
         } catch (error) {
