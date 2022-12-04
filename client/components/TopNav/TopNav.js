@@ -1,18 +1,32 @@
-import { UserAddOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import { UserAddOutlined, MailOutlined, SettingOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import ToggleTheme from './../ToggleTheme';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Link from 'next/link';
+import { useRouter } from "next/router";
+import { AuthContext } from '../../context/auth/auth';
 
 const { SubMenu } = Menu;
 
 const TopNav = () => {
+    const [auth, setAuth] = useContext(AuthContext);
+    const [current, setCurrent] = useState("mail");
+
+    const router = useRouter();
     const handleClick = e => {
         console.log("click ", e);
-        setCurrent({ current: e.key });
+        setCurrent(e.key);
     }
 
-    const [current, setCurrent] = useState("mail");
+    const signOut = () => {
+        localStorage.removeItem("auth");
+        setAuth({
+            user: null,
+            token: ''
+        });
+        router.push('/signin');
+    }
+
     return (
 
         <Menu onClick={handleClick} mode="horizontal" selectedKeys={[current]}>
@@ -26,11 +40,16 @@ const TopNav = () => {
                     <a>Signup</a>
                 </Link>
             </Menu.Item>
-            <Menu.Item key="signin" icon={<UserAddOutlined />}>
-                <Link href="/signin">
-                    <a>Signin</a>
-                </Link>
-            </Menu.Item>
+            <>
+                <Menu.Item key="signin" icon={<UserAddOutlined />}>
+                    <Link href="/signin">
+                        <a>Signin</a>
+                    </Link>
+                </Menu.Item>
+                <Menu.Item onClick={() => signOut()} key="signin" icon={<LogoutOutlined />}>
+                    <a>Sign out</a>
+                </Menu.Item>
+            </>
             <SubMenu style={{ marginLeft: "auto" }} key="SubMenu" icon={<SettingOutlined />} title="Dashboard">
                 <Menu.ItemGroup title="Management">
                     <Menu.Item key="setting:1">Management</Menu.Item>
