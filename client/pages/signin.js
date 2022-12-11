@@ -20,13 +20,18 @@ function Signin() {
         try {
             setLoading(true);
             const { data } = await axios.post('/signin', values);
-            setAuth(data);
-            localStorage.setItem('token',
-                JSON.stringify(data));
-            router.push('/admin');
-            toast.success('Signed in');
-            setLoading(false);
-
+            if (data?.error) {
+                toast.error(data.error);
+                setLoading(false);
+            }
+            else {
+                setAuth(data);
+                localStorage.setItem('token',
+                    JSON.stringify(data));
+                router.push('/admin');
+                toast.success('Signed in');
+                setLoading(false);
+            }
         } catch (error) {
             console.log(error)
             toast.error('Signin failed. Try again')
