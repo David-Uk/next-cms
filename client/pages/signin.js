@@ -9,6 +9,9 @@ import { useRouter } from 'next/router';
 
 function Signin() {
     const [auth, setAuth] = useContext(AuthContext);
+
+    const [form] = Form.useForm();
+
     const [loading, setLoading] = useState(false);
 
     const router = useRouter();
@@ -38,6 +41,7 @@ function Signin() {
 
                 {/* Name */}
                 <Form
+                    form={form}
                     name="normal_login"
                     className="login-form"
                     initialValues={{ remember: true }}

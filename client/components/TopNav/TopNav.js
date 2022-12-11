@@ -35,33 +35,39 @@ const TopNav = () => {
                     <a>CMS</a>
                 </Link>
             </Menu.Item>
-            <Menu.Item key="signup" icon={<UserAddOutlined />}>
-                <Link href="/signup">
-                    <a>Signup</a>
-                </Link>
-            </Menu.Item>
-            <>
+            {auth?.user === null && (<>
+                <Menu.Item style={{marginLeft:'auto'}} key="signup" icon={<UserAddOutlined />}>
+                    <Link href="/signup">
+                        <a>Signup</a>
+                    </Link>
+                </Menu.Item>
                 <Menu.Item key="signin" icon={<UserAddOutlined />}>
                     <Link href="/signin">
                         <a>Signin</a>
                     </Link>
                 </Menu.Item>
-                <Menu.Item onClick={() => signOut()} key="signin" icon={<LogoutOutlined />}>
-                    <a>Sign out</a>
-                </Menu.Item>
-            </>
-            <SubMenu style={{ marginLeft: "auto" }} key="SubMenu" icon={<SettingOutlined />} title="Dashboard">
-                <Menu.ItemGroup title="Management">
-                    <Menu.Item key="setting:1">Management</Menu.Item>
-                    <Menu.Item key="setting:2">
-                        <Link href='/admin'><a>Admin</a></Link>
+            </>)}
+            
+
+            {auth?.user !== null && (
+                <>
+                    <Menu.Item onClick={() => signOut()} key="signin" icon={<LogoutOutlined />}>
+                        <a>Sign out</a>
                     </Menu.Item>
-                </Menu.ItemGroup>
-                {/* <Menu.ItemGroup title="item2">
+                    <SubMenu style={{ marginLeft: "auto" }} key="SubMenu" icon={<SettingOutlined />} title="Dashboard">
+                        <Menu.ItemGroup title="Management">
+                            <Menu.Item key="setting:1">Management</Menu.Item>
+                            <Menu.Item key="setting:2">
+                                <Link href='/admin'><a>Admin</a></Link>
+                            </Menu.Item>
+                        </Menu.ItemGroup>
+                        {/* <Menu.ItemGroup title="item2">
                     <Menu.Item key="setting:3">3</Menu.Item>
                     <Menu.Item key="setting:4">4</Menu.Item>
                 </Menu.ItemGroup> */}
-            </SubMenu>
+                    </SubMenu>
+                </>)
+            }
             <Menu.Item key="toggle">
                 <ToggleTheme />
             </Menu.Item>
