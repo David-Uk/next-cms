@@ -73,9 +73,11 @@ function Signin() {
 
                     </Form.Item>
 
-                    <Link href="/signup">
-                        <a>Forgot password?</a>
-                    </Link>
+                    <Form.Item>
+                        <Link href="/forgot-password">
+                            <a>Forgot password</a>
+                        </Link>
+                    </Form.Item>
                     <br /><br />
 
                     <Form.Item>

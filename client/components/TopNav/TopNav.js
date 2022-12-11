@@ -29,14 +29,18 @@ const TopNav = () => {
 
     return (
 
-        <Menu onClick={handleClick} mode="horizontal" selectedKeys={[current]}>
+        <Menu
+            onClick={(e) => setCurrent(e.key)}
+            mode="horizontal"
+            selectedKeys={[current]}
+        >
             <Menu.Item key="mail" icon={<MailOutlined />}>
                 <Link href="/">
                     <a>CMS</a>
                 </Link>
             </Menu.Item>
             {auth?.user === null && (<>
-                <Menu.Item style={{marginLeft:'auto'}} key="signup" icon={<UserAddOutlined />}>
+                <Menu.Item style={{ marginLeft: 'auto' }} key="signup" icon={<UserAddOutlined />}>
                     <Link href="/signup">
                         <a>Signup</a>
                     </Link>
@@ -47,7 +51,7 @@ const TopNav = () => {
                     </Link>
                 </Menu.Item>
             </>)}
-            
+
 
             {auth?.user !== null && (
                 <>
