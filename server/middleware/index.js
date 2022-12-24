@@ -9,7 +9,9 @@ export const requireSignin = expressJwt({
 
 export const isAdmin = async (req, res, next) => {
     try {
-
+        const user = await User.findById(req.user._id);
+        if (user.role !== 'Admin') return res.status(403).json({ error: 'Admin access only' })
+        else next();
     } catch (error) {
         console.log(error)
     }
