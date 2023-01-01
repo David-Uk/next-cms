@@ -61,21 +61,30 @@ const TopNav = () => {
 
             {auth?.user !== null && (
                 <>
-                    <Menu.Item onClick={() => signOut()} key="signin" icon={<LogoutOutlined />}>
-                        <a>Sign out</a>
-                    </Menu.Item>
-                    <SubMenu style={{ marginLeft: "auto" }} key="SubMenu" icon={<SettingOutlined />} title={auth?.user?.name || 'Dashboard'}>
+                    <SubMenu
+                        key="SubMenu"
+                        icon={<SettingOutlined />}
+                        title={auth?.user?.name || "Dashboard"}
+                        style={{ marginLeft: "auto" }}
+                    >
                         <Menu.ItemGroup title="Management">
-                            {/* <Menu.Item key="setting:1">Management</Menu.Item> */}
-                            <Menu.Item key="setting:2">
-                                <Link href={roleBasedLink()}><a>Dashboard</a></Link>
+                            <Menu.Item key="setting:1">
+                                <Link href={roleBasedLink()}>
+                                    <a>Dashboard</a>
+                                </Link>
                             </Menu.Item>
                         </Menu.ItemGroup>
-                        {/* <Menu.ItemGroup title="item2">
+
+                        <Menu.ItemGroup title="Others">
+                            <Menu.Item key="setting:2" onClick={signOut}>
+                                Sign out
+                            </Menu.Item>
+                        </Menu.ItemGroup>
+                    </SubMenu>
+                    {/* <Menu.ItemGroup title="item2">
                     <Menu.Item key="setting:3">3</Menu.Item>
                     <Menu.Item key="setting:4">4</Menu.Item>
                 </Menu.ItemGroup> */}
-                    </SubMenu>
                 </>)
             }
             <Menu.Item key="toggle">

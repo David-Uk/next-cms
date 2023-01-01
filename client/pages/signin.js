@@ -3,7 +3,7 @@ import { Form, Row, Col, Input, Checkbox, Button } from 'antd';
 import axios from 'axios';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../context/auth/auth'
 import { useRouter } from 'next/router';
 
@@ -15,6 +15,12 @@ function Signin() {
     const [loading, setLoading] = useState(false);
 
     const router = useRouter();
+
+    useEffect(() => {
+        if (auth?.token) {
+            router.push('/')
+        }
+    }, [auth])
 
     const onFinish = async (values) => {
         try {
