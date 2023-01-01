@@ -28,8 +28,10 @@ function Signin() {
                 setAuth(data);
                 localStorage.setItem('token',
                     JSON.stringify(data));
-                router.push('/admin');
                 toast.success('Signed in');
+                if (data?.user?.role === 'Admin') router.push('/admin');
+                else if (data?.user?.role === 'Author') router.push('/author');
+                else router.push('/subscriber ')
                 setLoading(false);
             }
         } catch (error) {

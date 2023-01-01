@@ -18,6 +18,12 @@ const TopNav = () => {
         setCurrent(e.key);
     }
 
+    const roleBasedLink = () => {
+        if (auth?.user?.role === 'Admin') return '/admin';
+        else if (auth?.user?.role === 'Author') return '/author';
+        else return '/subscriber'
+    }
+
     const signOut = () => {
         localStorage.removeItem("auth");
         setAuth({
@@ -58,11 +64,11 @@ const TopNav = () => {
                     <Menu.Item onClick={() => signOut()} key="signin" icon={<LogoutOutlined />}>
                         <a>Sign out</a>
                     </Menu.Item>
-                    <SubMenu style={{ marginLeft: "auto" }} key="SubMenu" icon={<SettingOutlined />} title="Dashboard">
+                    <SubMenu style={{ marginLeft: "auto" }} key="SubMenu" icon={<SettingOutlined />} title={auth?.user?.name || 'Dashboard'}>
                         <Menu.ItemGroup title="Management">
-                            <Menu.Item key="setting:1">Management</Menu.Item>
+                            {/* <Menu.Item key="setting:1">Management</Menu.Item> */}
                             <Menu.Item key="setting:2">
-                                <Link href='/admin'><a>Admin</a></Link>
+                                <Link href={roleBasedLink()}><a>Dashboard</a></Link>
                             </Menu.Item>
                         </Menu.ItemGroup>
                         {/* <Menu.ItemGroup title="item2">
