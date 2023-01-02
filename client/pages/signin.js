@@ -21,31 +21,35 @@ function Signin() {
             router.push('/')
         }
     }, [auth])
-
     const onFinish = async (values) => {
+        // console.log("Success:", values);
         try {
             setLoading(true);
-            const { data } = await axios.post('/signin', values);
-            if (data?.error) {
+            const { data } = await axios.post(`/signin`, values);
+            console.log(data);
+            if (data.error) {
                 toast.error(data.error);
                 setLoading(false);
-            }
-            else {
-                setAuth(data);
-                localStorage.setItem('token',
-                    JSON.stringify(data));
-                toast.success('Signed in');
-                if (data?.user?.role === 'Admin') router.push('/admin');
-                else if (data?.user?.role === 'Author') router.push('/author');
-                else router.push('/subscriber ')
+            } else {
+                // save user and token response in context, localstorage then redirect user to dashboard
+                setAuth({ user: data.user, token: data.token });
+                localStorage.setItem("auth", JSON.stringify(data));
+                toast.success("Successfully logged in");
                 setLoading(false);
+                if (data.user?.role === "Admin") {
+                    router.push("/admin");
+                } else if (data.user?.role === "Author") {
+                    router.push("/author");
+                } else {
+                    router.push("/subscriber");
+                }
             }
-        } catch (error) {
-            console.log(error)
-            toast.error('Signin failed. Try again')
+        } catch (err) {
+            toast.error("SignIn failed. Try again.");
+            console.log(err);
+            setLoading(false);
         }
-    }
-
+    };
 
     return (
         <Row>

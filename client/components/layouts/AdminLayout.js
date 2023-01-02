@@ -14,23 +14,22 @@ function AdminLayout({ children }) {
 
     const router = useRouter()
     useEffect(() => {
-        // if (!auth?.user?.role !== 'Admin') router.push('/');
-        // else setLoading(false);
-        getCurrentAdmin()
-    }, [auth?.token])
+        if (auth?.token) {
+            getCurrentAdmin();
+        }
+    }, [auth?.token]);
 
     const getCurrentAdmin = async () => {
         try {
-            const { data } = await axios.get('/current-admin');
-            setLoading(false);
-            console.log(data)
+            const { data } = await axios.get(`/current-admin`);
+            console.log("current admin", data);
+            if (data.ok) {
+                setLoading(false);
+            }
+        } catch (err) {
+            router.push("/");
         }
-        catch (err) {
-            console.log(err)
-            router.push('/')
-        }
-
-    }
+    };
 
     if (loading) {
         return <LoadingOutlined style={{

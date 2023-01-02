@@ -1,4 +1,5 @@
 import expressJwt from 'express-jwt'
+import User from '../models/user'
 
 require('dotenv').config()
 

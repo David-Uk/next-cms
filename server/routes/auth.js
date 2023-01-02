@@ -1,5 +1,6 @@
 
 import express from "express";
+import { isAdmin, requireSignin } from "../middleware";
 
 const router = express.Router();
 
@@ -9,6 +10,7 @@ const {
   signin,
   forgotPassword,
   resetPassword,
+  currentUser
 } = require("../controllers/auth");
 
 router.get("/", (req, res) => {
@@ -20,5 +22,6 @@ router.post("/signup", signup);
 router.post("/signin", signin);
 router.post("/forgot-password", forgotPassword);
 router.post("/reset-password", resetPassword);
+router.get('/current-admin', requireSignin, isAdmin, currentUser)
 
 export default router;
